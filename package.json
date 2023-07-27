@@ -1,0 +1,38 @@
+{
+  "name": "sby-config",
+  "displayName": "SymbiYosys Syntax Highlighting",
+  "description": "Syntax highlighting for SymbiYosys .sby files",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "publisher": "aidanmedcalf",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AidanMedcalf/sby-config-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/AidanMedcalf/sby-config-vscode/issues"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "sby",
+      "aliases": ["symbiyosys", "sby"],
+      "extensions": [".sby"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "sby",
+      "scopeName": "source.sby",
+      "path": "./syntaxes/sby.tmLanguage.json",
+      "embeddedLanguages": {
+        "meta.embedded.block.python": "python",
+        "meta.embedded.inline.yosys": "yosys"
+      }
+    }]
+  }
+}

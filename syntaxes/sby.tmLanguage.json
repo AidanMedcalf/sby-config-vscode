@@ -1,0 +1,280 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "sby",
+	"patterns": [
+		{
+			"include": "#sections"
+		},
+		{
+			"include": "#comments"
+		}
+	],
+	"repository": {
+		"sections": {
+			"name": "entity.name.section.sby",
+			"patterns": [{
+				"name": "entity.name.section.tasks.sby",
+				"begin": "^\\s*\\[tasks\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" }
+				},
+				"patterns": [
+					{
+						"include": "#pycode"
+					},
+					{
+						"include": "#comments"
+					},
+					{
+						"name": "variable.name.task.sby",
+						"match": "^\\s*\\w+\\b"
+					},
+					{
+						"name": "keyword.other.default.sby",
+						"match": "\\bdefault\\b"
+					},
+					{
+						"name": "entity.name.tag.taskalias.sby",
+						"match": "\\b\\w+\\b"
+					}
+				]
+			},
+			{
+				"name": "entity.name.section.options.sby",
+				"begin": "^\\s*\\[options\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" }
+				},
+				"patterns": [
+					{
+						"include": "#pycode"
+					},
+					{
+						"include": "#comments"
+					},
+					{
+						"include": "#tags"
+					},
+					{
+						"include": "#tagstop"
+					},
+					{
+						"include": "#options"
+					}
+				]
+			},
+			{
+				"name": "entity.name.section.engines.sby",
+				"begin": "^\\s*\\[engines\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" }
+				},
+				"patterns": [
+					{
+						"include": "#pycode"
+					},
+					{
+						"include": "#comments"
+					},
+					{
+						"include": "#tags"
+					},
+					{
+						"include": "#tagstop"
+					},
+					{
+						"include": "#engines"
+					}
+				]
+			},
+			{
+				"name": "entity.name.section.files.sby",
+				"begin": "^\\s*\\[files\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" }
+				},
+				"patterns": [
+					{
+						"include": "#pycode"
+					},
+					{
+						"include": "#comments"
+					},
+					{
+						"include": "#tags"
+					},
+					{
+						"include": "#tagstop"
+					},
+					{
+						"include": "#files"
+					}
+				]
+			},
+			{
+				"name": "entity.name.section.script.sby",
+				"begin": "^\\s*\\[script\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" }
+				},
+				"patterns": [
+					{
+						"include": "#pycode"
+					},
+					{
+						"include": "#comments"
+					},
+					{
+						"include": "#tags-iso"
+					},
+					{
+						"include": "#tagstop"
+					},
+					{
+						"include": "source.yosys"
+					}
+				]
+			},
+			{
+				"name": "entity.name.section.file.v.sby",
+				"begin": "^\\s*\\[file\\s+(.+)(\\.vh?)\\s*\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": {
+						"name": "keyword.other.section.sby"
+					},
+					"1": {
+						"name": "variable.parameter.filename.sby"
+					},
+					"2": {
+						"name": "support.type.filetype.verilog"
+					}
+				},
+				"patterns": [{
+					"include": "source.verilog"
+				}]
+			},
+			{
+				"name": "entity.name.section.file.sv.sby",
+				"begin": "^\\s*\\[file\\s+(.+)(\\.sv)\\s*\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": {
+						"name": "keyword.other.section.sby"
+					},
+					"1": {
+						"name": "variable.parameter.filename.sby"
+					},
+					"2": {
+						"name": "support.type.filetype.systemverilog"
+					}
+				},
+				"patterns": [
+					{
+						"include": "source.systemverilog"
+					}
+				]
+			},
+			{
+				"name": "entity.name.section.file.generic.sby",
+				"begin": "^\\s*\\[file\\s+(.+)(\\..*)?\\s*\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" },
+					"1": { "name": "variable.parameter.filename.sby" },
+					"2": { "name": "support.type.filetype" }
+				}
+			},
+			{
+				"name": "entity.name.section.generic.sby",
+				"begin": "^\\s*\\[.*\\]\\s*$",
+				"while": "^(?!\\s*\\[)",
+				"beginCaptures": {
+					"0": { "name": "keyword.other.section.sby" }
+				},
+				"patterns": [
+					{
+						"include": "#pycode"
+					},
+					{
+						"include": "#comments"
+					},
+					{
+						"include": "#tags"
+					},
+					{
+						"include": "#tagstop"
+					}
+				]
+			}]
+		},
+		"comments": {
+			"name": "comment.line.sby",
+			"match": "^\\s*#.*$"
+		},
+		"tags": {
+			"name": "keyword.control.tasktag.sby",
+			"match": "^\\s*(~)?\\s*\\w*\\s*:",
+			"captures": {
+				"1": { "name": "keyword.operator.negation.sby" }
+			}
+		},
+		"tags-iso": {
+			"name": "keyword.control.tasktag.sby",
+			"match": "^\\s*(~)?\\s*\\w*\\s*:\\s*$",
+			"captures": {
+				"1": {
+					"name": "keyword.operator.negation.sby"
+				}
+			}
+		},
+		"tagstop": {
+			"name": "keyword.control.tasktagstop.sby",
+			"match": "^\\s*---\\s*$"
+		},
+		"options": {
+			"name": "meta.structure.option.sby",
+			"match": "\\s*(\\w+)\\s+(\\w*)\\s*(.*)$",
+			"captures": {
+				"1": { "name": "variable.language.option.sby" },
+				"2": { "name": "variable.parameter.optionvalue.sby" }
+			}
+		},
+		"engines": {
+			"name": "meta.structure.engine.sby",
+			"match": "\\s*(smtbmc|btor|abc|aiger)\\s*(.*)$",
+			"captures": {
+				"1": { "name": "keyword.other.engine.sby" },
+				"2": { "name": "variable.parameter.engineargs.sby" }
+			}
+		},
+		"files": {
+			"name": "meta.structure.file.sby",
+			"match": "\\s*(\\S+)\\s*(.*)$",
+			"captures": {
+				"1": { "name": "markup.underline.link.file" },
+				"2": { "name": "invalid.illegal.file" }
+			}
+		},
+		"pycode": {
+			"name": "meta.embedded.block.python",
+			"begin": "^\\s*--pycode-begin--\\s*$",
+			"end": "^\\s*--pycode-end--\\s*$",
+			"beginCaptures": {
+				"0": { "name": "punctuation.definition.embedded.begin.python" }
+			},
+			"endCaptures": {
+				"0": { "name": "punctuation.definition.embedded.end.python" }
+			},
+			"patterns": [{
+				"include": "source.python"
+			}]
+		}
+	},
+	"scopeName": "source.sby"
+}
